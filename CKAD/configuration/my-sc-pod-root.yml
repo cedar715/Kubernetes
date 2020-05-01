@@ -1,3 +1,5 @@
+# works
+# runs the ctr as root
 apiVersion: v1
 kind: Pod
 metadata:
@@ -7,16 +9,16 @@ metadata:
   name: my-sc-pod
 spec:
   containers:
-  - image: busybox
-    name: my-sc-pod
-    command:
-            - sh
-            - -c
-            - "cat /messages/msg.txt && sleep 3600"
-    volumeMounts:
-            - name: msg-vol
-              mountPath: /messages
+    - image: busybox
+      name: my-sc-pod
+      command:
+        - sh
+        - -c
+        - "cat /messages/msg.txt && sleep 3600"
+      volumeMounts:
+        - name: msg-vol
+          mountPath: /messages
   volumes:
-          - name: msg-vol
-            hostPath:
-                    path: /etc/messages
+    - name: msg-vol
+      hostPath:
+        path: /etc/messages

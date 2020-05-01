@@ -1,3 +1,5 @@
+# works
+# ctr is run as the
 apiVersion: v1
 kind: Pod
 metadata:
@@ -7,19 +9,19 @@ metadata:
   name: my-sc-pod-owner
 spec:
   securityContext:
-          runAsUser: 2000
-          runAsGroup: 3000
-  containers:  
-  - image: busybox
-    name: my-sc-pod
-    command:
-            - sh
-            - -c
-            - "cat /messages/msg.txt && sleep 3600"
-    volumeMounts:
-            - name: msg-vol
-              mountPath: /messages
+    runAsUser: 2000
+    runAsGroup: 3000
+  containers:
+    - image: busybox
+      name: my-sc-pod
+      command:
+        - sh
+        - -c
+        - "cat /messages/msg.txt && sleep 3600"
+      volumeMounts:
+        - name: msg-vol
+          mountPath: /messages
   volumes:
-          - name: msg-vol
-            hostPath:
-                    path: /etc/messages
+    - name: msg-vol
+      hostPath:
+        path: /etc/messages

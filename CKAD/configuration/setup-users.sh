@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 sudo useradd -u 2000 ctr-user-0
 sudo groupadd -g 3000 ctr-grp-0
 

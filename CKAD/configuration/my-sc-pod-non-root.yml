@@ -1,3 +1,5 @@
+# results in CreateContainerConfigError
+# Error: container has runAsNonRoot and image will run as root
 apiVersion: v1
 kind: Pod
 metadata:
@@ -7,18 +9,18 @@ metadata:
   name: my-sc-pod-non-root
 spec:
   securityContext:
-          runAsNonRoot: true
+    runAsNonRoot: true
   containers:
-  - image: busybox
-    name: my-sc-pod
-    command:
-            - sh
-            - -c
-            - "cat /messages/msg.txt && sleep 3600"
-    volumeMounts:
-            - name: msg-vol
-              mountPath: /messages
+    - image: busybox
+      name: my-sc-pod
+      command:
+        - sh
+        - -c
+        - "cat /messages/msg.txt && sleep 3600"
+      volumeMounts:
+        - name: msg-vol
+          mountPath: /messages
   volumes:
-          - name: msg-vol
-            hostPath:
-                    path: /etc/messages
+    - name: msg-vol
+      hostPath:
+        path: /etc/messages

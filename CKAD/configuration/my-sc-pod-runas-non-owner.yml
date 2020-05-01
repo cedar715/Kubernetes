@@ -1,3 +1,6 @@
+# error
+# ctr is run as non-owner ID
+# can't access the file
 apiVersion: v1
 kind: Pod
 metadata:
@@ -7,19 +10,19 @@ metadata:
   name: my-sc-pod-non-owner
 spec:
   securityContext:
-          runAsUser: 2001
-          runAsGroup: 3001
+    runAsUser: 2001
+    runAsGroup: 3001
   containers:
-  - image: busybox
-    name: my-sc-pod
-    command:
-            - sh
-            - -c
-            - "cat /messages/msg.txt && sleep 3600"
-    volumeMounts:
-            - name: msg-vol
-              mountPath: /messages
+    - image: busybox
+      name: my-sc-pod
+      command:
+        - sh
+        - -c
+        - "cat /messages/msg.txt && sleep 3600"
+      volumeMounts:
+        - name: msg-vol
+          mountPath: /messages
   volumes:
-          - name: msg-vol
-            hostPath:
-                    path: /etc/messages
+    - name: msg-vol
+      hostPath:
+        path: /etc/messages
