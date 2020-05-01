@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-sc-pod-non-root
+  name: my-sc-pod-non-root
+spec:
+  securityContext:
+          runAsNonRoot: true
+  containers:
+  - image: busybox
+    name: my-sc-pod
+    command:
+            - sh
+            - -c
+            - "cat /messages/msg.txt && sleep 3600"
+    volumeMounts:
+            - name: msg-vol
+              mountPath: /messages
+  volumes:
+          - name: msg-vol
+            hostPath:
+                    path: /etc/messages
