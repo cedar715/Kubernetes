@@ -1,0 +1,25 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: HanuAthena
+  region: us-east-1
+
+nodeGroups:
+
+  # SINGLE AZ FOR STATEFUL APPLNS
+  - name: scale-east1a
+    instanceType: t2.small
+    desiredCapacity: 1
+    maxSize: 3
+    availabilityZones: ["us-east-1a"]
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    labels:
+      nodegroup-type: stateful-east1a
+      instance-type: onDemand
+    ssh: # use existing EC2 key
+      publicKeyName: eks
+
+availabilityZones: ["us-east-1a", "us-east-1d"]
