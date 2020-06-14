@@ -1,0 +1,28 @@
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: dice-job
+spec:
+  # At least one pod should exit successfully, and only
+  # one pod should run at a time.
+  completions: 1
+  parallelism: 1
+
+  # The spec for the pod that gets created when our job runs.
+  template:
+    metadata:
+      name: dice-pod
+    spec:
+      # Pods used in jobs *must* use a restart policy of "OnFailure" or "Never"
+      # OnFailure = Re-run the container in the same pod
+      # Never = Run the container in a new pod
+      restartPolicy: OnFailure 
+
+      # This container simulates a dice roll and returns a zero exit code
+      # (i.e. success) when we get a six.
+      containers:
+        - name: dice
+          image: alpine
+          command: ["/bin/sh"]
+          # if dice_roll == 6, return 0. else, return 1. 
+          args: ["-c", "if [ \"$(shuf -i 1-6 -n 1)\" = \"6\" ]; then exit 0; else exit 1; fi"]

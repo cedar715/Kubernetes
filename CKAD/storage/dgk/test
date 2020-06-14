@@ -1,0 +1,3 @@
+source <(kubectl completion bash)\nalias kc=kubectl\ncomplete -F __start_kubectl kc
+source <(kubectl completion bash)\nalias kc=kubectl\ncomplete -F __start_kubectl kc
+source <(kubectl completion bash) \n alias kc=kubectl \n complete -F __start_kubectl kc

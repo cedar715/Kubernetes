@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: date-time
+  name: date-time
+spec:
+  selector:
+    matchLabels:
+      app: date-time
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: date-time
+    spec:
+      containers:
+      - image: jprao715/simpleapp:v1
+        imagePullPolicy: IfNotPresent
+        name: simpleapp
+        readinessProbe:
+               periodSeconds: 5
+               exec:
+                  command:
+                     - cat
+                     - /tmp/healthy

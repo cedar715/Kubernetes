@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bb
+  name: bb
+spec:
+  volumes:
+    - name: avol
+      emptyDir: {}
+  containers:
+  - command:
+    - sleep
+    - "3600"
+    image: busybox
+    name: bb
+    volumeMounts:
+        - name: avol
+          mountPath: /etc/foo
+  - command:
+    - sleep
+    - "3600"
+    image: busybox
+    name: bb2
+    volumeMounts:
+        - name: avol
+          mountPath: /etc/foo

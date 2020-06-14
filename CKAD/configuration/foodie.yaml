@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: foodie
+  name: foodie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foodie
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: foodie
+    spec:
+      volumes:
+          - name: splofday
+            secret:
+               secretName: specialofday
+          - name: reviewvol
+            persistentVolumeClaim:
+               claimName: reviewpvc
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+            - name: splofday
+              mountPath: /food
+            - name: reviewvol
+              mountPath: /newvol
+        resources: {}
+status: {}

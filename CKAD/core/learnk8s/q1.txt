@@ -1,0 +1,16 @@
+NAMESPACE              NAME                                         READY   STATUS      RESTARTS   AGE
+kong                   httpbin-7c9997c7f-7zbjr                      1/1     Running     1          2d10h
+kong                   kong-cp-77694f54bf-lzqs4                     1/1     Running     1          2d10h
+kong                   kong-db-migrations-4qc74                     0/1     Completed   3          2d10h
+kong                   kong-dp-f84f5f7cb-w4776                      1/1     Running     1          2d10h
+kong                   postgres-5d48fcb598-6zkcm                    1/1     Running     1          2d10h
+kube-system            coredns-66bff467f8-9m2wb                     1/1     Running     2          5d3h
+kube-system            coredns-66bff467f8-p6gwv                     1/1     Running     2          5d3h
+kube-system            etcd-minikube                                1/1     Running     2          5d3h
+kube-system            kube-apiserver-minikube                      1/1     Running     2          5d3h
+kube-system            kube-controller-manager-minikube             1/1     Running     2          5d3h
+kube-system            kube-proxy-vn8s8                             1/1     Running     2          5d3h
+kube-system            kube-scheduler-minikube                      1/1     Running     2          5d3h
+kube-system            storage-provisioner                          1/1     Running     4          5d3h
+kubernetes-dashboard   dashboard-metrics-scraper-84bfdf55ff-75mt8   1/1     Running     1          5d1h
+kubernetes-dashboard   kubernetes-dashboard-696dbcc666-b87ml        1/1     Running     2          5d1h

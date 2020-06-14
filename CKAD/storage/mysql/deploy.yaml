@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mysql
+    spec:
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+                      claimName: db-pvc
+      containers:
+      - image: mysql
+        name: mysql
+        ports:
+          - containerPort: 3306
+        volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/mysql
+        livenessProbe:
+            tcpSocket:
+               port: 3306
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                   name: mysql-secrets
+                   key: mysql-root-password
+        resources:
+           requests:
+               cpu: 800m
+               memory: 800Mi
+                   
+  
+ 

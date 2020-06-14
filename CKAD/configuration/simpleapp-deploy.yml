@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simpleapp
+  name: simpleapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simpleapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simpleapp
+    spec:
+      volumes:
+          - name: car-vol
+            configMap:
+                 name: fast-car
+          - name: nfs-vol
+            persistentVolumeClaim:
+               claimName: pvc-one
+      containers:
+      - image: jprao715/simpleapp:v1
+        name: simpleapp
+        env:
+          - name: ilike
+            valueFrom:
+              configMapKeyRef:
+                    name: colours
+                    key: favourite
+        envFrom:
+          - configMapRef:
+                 name: colours
+        readinessProbe:
+             periodSeconds: 5
+             exec:
+               command:
+                  - cat
+                  - /tmp/healthy
+        volumeMounts:
+            - name: car-vol
+              mountPath: /etc/cars
+            - name: nfs-vol
+              mountPath: /opt

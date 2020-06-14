@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: stressmeout
+  name: stressmeout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stressmeout
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: stressmeout
+    spec:
+      containers:
+      - image: vish/stress
+        name: stress
+        args:
+           - -cpus
+           - "2" # consumes 2 core CPU, which is almost the node has
+           - -mem-total
+           - "1950Mi"
+           - -mem-alloc-size
+           - "100Mi"
+           - -mem-alloc-sleep
+           - "1s"
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "0.5"
+          limits:
+            memory: "2Gi"
+            cpu: 1

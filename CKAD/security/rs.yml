@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet 
+metadata:
+  labels:
+    app: cal
+  name: cal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cal
+  template:
+    metadata:
+      labels:
+        app: cal
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
