@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: autoscaler-tester
+  name: autoscaler-tester
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autoscaler-tester
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: autoscaler-tester
+      name: autoscaler-tester
+    spec:
+      nodeSelector:
+       nodegroup-type: stateful-east1a
+      containers:
+      - image: nginx
+        name: autoscaler-tester
+        resources:
+          limits:
+            cpu: 300m
+            memory: 512Mi
+          requests:
+            cpu: 300m
+            memory: 512Mi
